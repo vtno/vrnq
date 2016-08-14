@@ -10,16 +10,6 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  def remove_order_item
-    if session[:order_items].present?
-      sesion[:order_items].each do |item|
-        if item['id'] == params[:id]
-          session[:order_items].delete()
-        end
-      end
-    end
-  end
-
   def destroy
     if @order.destroy
       flash[:notice] = 'Order deleted'
@@ -33,11 +23,12 @@ class OrdersController < ApplicationController
    order = Order.new(order_params.merge({total_price: total_price}))
    order.total_cost = order.total_cost + order_params[:shipping_cost].to_i + order_params[:packaging_cost].to_i
    if order.save
-     session[:order_items].each do |item|
-       OrderProduct.create(product_id: item['id'], order_id: order.id)
+     current_user.cart.cart_products.each do |item|
+       OrderProduct.create(product_id: item.product.id, order_id: order.id, amount: item.amount)
      end
    end
-   session.delete(:order_items)
+   current_user.cart.clear
+   current_user.cart.save
    redirect_to orders_path, notice: 'Order created'
   end
 

@@ -2,21 +2,39 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @order = Order.new
+    @cart = current_user.cart
+    @cart ||= Cart.create(user_id: current_user.id)
   end
 
   def new
     @product = Product.new
   end
 
-  def add_to_order
-    product = Product.find(params[:id])
-    if session[:order_items].blank?
-      order_items = Array.new(1, product)
-    else
-      order_items = session[:order_items]
-      order_items.push(product)
+  def remove_all_from_order
+    current_user.cart.clear
+    current_user.cart.save
+    redirect_to products_path, notice: 'Order cleared'
+  end
+
+  def remove_from_order
+    if current_user.cart.present?
+      current_user.cart.remove(params[:id])
     end
-    session[:order_items] = order_items
+    redirect_to products_path, notice: 'Remove a product from order'
+  rescue ActiveRecord::RecordNotFound
+    redirect_to products_path, alert: 'There is no such product'
+  end
+
+  def add_to_order
+    cart = current_user.cart
+    if cart.present?
+      cart.add(params[:id])
+    else
+      cart = Cart.new()
+      if cart.save
+        cart.add(params[:id])
+      end
+    end
     redirect_to products_path, notice: 'Added product to order'
   end
 

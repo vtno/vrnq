@@ -4,6 +4,12 @@
       <div class="panel panel-default">
         <div class="panel-heading"><h4>[Order ID] : <%= @order.id%>   [Buyer] : <%= @order.buyer_name%></h4></div>
         <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4"><b>Name</b></div>
+            <div class="col-md-3"><b>Price</b></div>
+            <div class="col-md-3"><b>Cost</b></div>
+            <div class="col-md-2"><b>Amnt.</b></div>
+          </div>
           <%= render partial: 'order_products', collection: @order.order_products, as: :item %>
         </div>
         <div class="panel-footer">

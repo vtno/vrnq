@@ -3,8 +3,8 @@
     <div class="col-md-6">
       <h2 class='text-left'>New Order</h2>
       <%= form_for(@order, url: orders_path(@order)) do |f|  %>
-        <%= f.hidden_field :full_price, value: cal_total(session[:order_items], 'price') %>
-        <%= f.hidden_field :total_cost, value: cal_total(session[:order_items], 'cost') %>
+        <%= f.hidden_field :full_price, value: @cart.total_price %>
+        <%= f.hidden_field :total_cost, value: @cart.total_cost %>
         <div class="form-group">
           <%= f.label 'Buyer Name' %>
           <%= f.text_field :buyer_name, class: 'form-control', autocomplete: 'off' %>
@@ -27,7 +27,7 @@
         </div>
         <div class="text-center">
           <%= f.submit 'สร้าง Order', class: 'btn btn-default btn-primary' %>
-          <%= f.submit 'Clear', class: 'btn btn-default', type:'reset' %>
+          <%= link_to 'Clear', remove_all_from_order_product_path(99), class: 'btn btn-default'%>
         </div>
       <% end %>
     </div>
@@ -38,19 +38,20 @@
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-4"><b>Name</b></div>
+            <div class="col-md-3"><b>Name</b></div>
             <div class="col-md-3"><b>Price</b></div>
             <div class="col-md-3"><b>Cost</b></div>
+            <div class="col-md-1"><b>Amnt.</b></div>
           </div>
-          <%= render partial: 'orders/order_items', collection: session[:order_items], as: :item %>
+          <%= render partial: 'orders/order_items', collection: @cart.cart_products, as: :item %>
         </div>
         <div class="panel-footer">
           <div class="row">
             <div class="col-md-6">
-              <h4>Total price: <%= cal_total(session[:order_items], 'price') %></h4>
+              <h4>Total price: <%= @cart.total_price %></h4>
             </div>
             <div class="col-md-6">
-              <h4>Total cost: <%= cal_total(session[:order_items], 'cost') %></h4>
+              <h4>Total cost: <%= @cart.total_cost %></h4>
             </div>
           </div>
         </div>
