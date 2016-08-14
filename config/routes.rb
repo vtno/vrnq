@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   resources :products do
     member do
       get 'add_to_order', to: 'products#add_to_order', as: :add_to_order
-      post 'remove_order_item', to: 'orders#remove_order_item', as: :remove_order_item
+      get 'remove_from_order', to: 'products#remove_from_order', as: :remove_from_order
+      get 'remove_all_from_order', to: 'products#remove_all_from_order', as: :remove_all_from_order
     end
+
   end
 
   # Example of regular route:

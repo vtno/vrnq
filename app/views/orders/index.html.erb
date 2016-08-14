@@ -1,4 +1,20 @@
 <div class="container">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading"><h1 class='text-center'>Summary</h1></div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>Month/Year</th>
+            <th>Total Revenue</th>
+            <th>Total Profit</th>
+            <th>Total Cost</th>
+          </tr>
+          <%= render partial: 'summary', collection: @this_year, as: :order %>
+        </table>
+      </div>
+    </div>
+  </div>
   <h1 class='text-center'> Order History </h1>
   <table class="table table-bordered table-striped">
     <tr>

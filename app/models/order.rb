@@ -19,4 +19,8 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :products, through: :order_product
   has_many :order_products
+
+  scope :by_year, -> (year) { where("extract( YEAR FROM created_at) = ?", year) }
+  scope :by_month, -> (month) { where("extract( MONTH FROM created_at) = ?", month) }
+
 end
