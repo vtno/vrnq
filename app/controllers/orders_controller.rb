@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   def create
    total_price = order_params[:full_price].to_i - order_params[:discount].to_i
    order = Order.new(order_params.merge({total_price: total_price}))
-   order.total_cost = order_params[:shipping_cost].to_i + order_params[:packaging_cost].to_i + order_params[:total_cost]
+   order.total_cost = order_params[:shipping_cost].to_i + order_params[:packaging_cost].to_i + order_params[:total_cost].to_i
    if order.save
      current_user.cart.cart_products.each do |item|
        OrderProduct.create(product_id: item.product.id, order_id: order.id, amount: item.amount)
