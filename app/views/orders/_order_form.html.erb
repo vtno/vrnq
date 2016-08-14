@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class='text-left'>New Order</h2>
+      <%= form_for(@order, url: orders_path(@order)) do |f|  %>
+        <%= f.hidden_field :full_price, value: cal_total(session[:order_items], 'price') %>
+        <%= f.hidden_field :total_cost, value: cal_total(session[:order_items], 'cost') %>
+        <div class="form-group">
+          <%= f.label 'Buyer Name' %>
+          <%= f.text_field :buyer_name, class: 'form-control', autocomplete: 'off' %>
+        </div>
+        <div class="form-group">
+          <%= f.label 'Shipping Cost' %>
+          <%= f.number_field :shipping_cost, class: 'form-control', autocomplete: 'off' %>
+        </div>
+        <div class="form-group">
+          <%= f.label 'Packaging Cost' %>
+          <%= f.number_field :packaging_cost, class: 'form-control', autocomplete: 'off', min: 0 %>
+        </div>
+        <div class="form-group">
+          <%= f.label 'Discount' %>
+          <%= f.number_field :discount, class: 'form-control', autocomplete: 'off', min: 0 %>
+        </div>
+        <div class="form-group">
+          <%= f.label 'Note' %>
+          <%= f.text_field :description, class: 'form-control', autocomplete: 'off' %>
+        </div>
+        <div class="text-center">
+          <%= f.submit 'สร้าง Order', class: 'btn btn-default btn-primary' %>
+          <%= f.submit 'Clear', class: 'btn btn-default', type:'reset' %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>Ordered Products</h2>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4"><b>Name</b></div>
+            <div class="col-md-3"><b>Price</b></div>
+            <div class="col-md-3"><b>Cost</b></div>
+          </div>
+          <%= render partial: 'orders/order_items', collection: session[:order_items], as: :item %>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Total price: <%= cal_total(session[:order_items], 'price') %></h4>
+            </div>
+            <div class="col-md-6">
+              <h4>Total cost: <%= cal_total(session[:order_items], 'cost') %></h4>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,8 +4,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'order#index'
+  root 'products#index'
   resources :orders
+  resources :products do
+    member do
+      get 'add_to_order', to: 'products#add_to_order', as: :add_to_order
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

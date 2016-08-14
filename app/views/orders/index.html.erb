@@ -1,0 +1,20 @@
+<div class="container">
+  <h1 class='text-center'> Order History </h1>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th><h3>Order ID</h3></th>
+      <th><h3>Total Price</h3></th>
+      <th><h3>Full Price</h3></th>
+      <th><h3>Discount</h3></th>
+      <th><h3>Total Cost</h3></th>
+      <th><h3>Buyer Name</h3></th>
+      <th><h3>Options</h3></th>
+    </tr>
+    <tr>
+      <td class="text-center" colspan=100%>
+        <%= link_to 'Add new order', products_path, class: 'btn btn-success'%>
+      </td>
+    </tr>
+    <%= render partial: 'order', collection: @orders, as: :order %>
+  </table>
+</div>

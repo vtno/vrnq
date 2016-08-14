@@ -1,0 +1,22 @@
+<div class="container" style='padding: 0 0 5%;'>
+  <h1 class='text-center' style='margin-bottom:3%;'>Veronique Tool</h1>
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th><h3>Name</h3></th>
+      <th><h3>Price</h3></th>
+      <th><h3>Cost</h3></th>
+      <th><h3>Stock</h3></th>
+      <th><h3>Description</h3></th>
+      <th><h3>Option</h3></th>
+    </tr>
+    <tr>
+      <td class="text-center" colspan=100%>
+        <%= link_to 'Add new product', new_product_path, class: 'btn btn-success'%>
+      </td>
+    </tr>
+    <%= render partial: 'product', collection: @products, as: :p %>
+  </table>
+  <div class="row">
+    <%= render 'orders/order_form'%>
+  </div>
+</div>

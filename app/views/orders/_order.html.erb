@@ -1,0 +1,25 @@
+<tr>
+  <td>
+    <%= order.id%>
+  </td>
+  <td>
+    <%= order.total_price%>
+  </td>
+  <td>
+    <%= order.full_price%>
+  </td>
+  <td>
+    <%= order.discount%>
+  </td>
+  <td>
+    <%= order.total_cost%>
+  </td>
+  <td>
+    <%= order.buyer_name%>
+  </td>
+  <td class='text-center'>
+    <%= link_to 'Show', order_path(order.id), class: 'btn btn-success'%>
+    <%= link_to 'Edit', edit_order_path(order.id), class: 'btn btn-warning'%>
+    <%= link_to 'Delete', order_path(order.id), method: 'delete', class: 'btn btn-danger'%>
+  </td>
+</tr>
