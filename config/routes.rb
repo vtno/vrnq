@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   resources :products do
     member do
       get 'add_to_order', to: 'products#add_to_order', as: :add_to_order
+      post 'remove_order_item', to: 'orders#remove_order_item', as: :remove_order_item
     end
   end
 

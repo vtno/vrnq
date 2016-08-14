@@ -10,6 +10,16 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  def remove_order_item
+    if session[:order_items].present?
+      sesion[:order_items].each do |item|
+        if item['id'] == params[:id]
+          session[:order_items].delete()
+        end
+      end
+    end
+  end
+
   def destroy
     if @order.destroy
       flash[:notice] = 'Order deleted'

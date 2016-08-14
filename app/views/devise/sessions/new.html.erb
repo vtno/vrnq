@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class='text-center'>Veronique</h2>
+        </div>
+        <div class="panel-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-group">
+                <%= f.label :email , class: 'label label-default'%>
+                <%= f.email_field :email, autofocus: true, class:'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password ,class: 'label label-default'%>
+                <%= f.password_field :password, autocomplete: "off", class:'form-control' %>
+              </div>
+              <div class="actions text-center">
+                <%= f.submit "Log in" , class: 'btn btn-primary'%>
+              </div>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
