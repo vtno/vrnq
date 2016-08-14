@@ -1,4 +1,7 @@
 <ul class="nav nav-tabs">
   <li role="presentation"><a href="<%= products_path %>">Products</a></li>
   <li role="presentation"><a href=" <%= orders_path %>">Orders</a></li>
+  <% if user_signed_in? %>
+    <li role="presentation"><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+  <%end%>
 </ul>
