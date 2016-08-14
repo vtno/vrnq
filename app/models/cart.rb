@@ -33,6 +33,13 @@ class Cart < ApplicationRecord
     total
   end
 
+  def clear
+    cart_products.each do |cart_item|
+      cart_item.amount = 0
+      cart_item.save
+    end
+  end
+
   def total_cost
     total = 0
     cart_products.each do |cart_item|

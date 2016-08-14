@@ -3,8 +3,8 @@
     <div class="col-md-6">
       <h2 class='text-left'>New Order</h2>
       <%= form_for(@order, url: orders_path(@order)) do |f|  %>
-        <%= f.hidden_field :full_price, value: cal_total(session[:order_items], 'price') %>
-        <%= f.hidden_field :total_cost, value: cal_total(session[:order_items], 'cost') %>
+        <%= f.hidden_field :full_price, value: @cart.total_price %>
+        <%= f.hidden_field :total_cost, value: @cart.total_cost %>
         <div class="form-group">
           <%= f.label 'Buyer Name' %>
           <%= f.text_field :buyer_name, class: 'form-control', autocomplete: 'off' %>
@@ -27,7 +27,7 @@
         </div>
         <div class="text-center">
           <%= f.submit 'สร้าง Order', class: 'btn btn-default btn-primary' %>
-          <%= f.submit 'Clear', class: 'btn btn-default', type:'reset' %>
+          <%= link_to 'Clear', remove_all_from_order_product_path(99), class: 'btn btn-default'%>
         </div>
       <% end %>
     </div>

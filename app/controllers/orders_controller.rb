@@ -23,11 +23,12 @@ class OrdersController < ApplicationController
    order = Order.new(order_params.merge({total_price: total_price}))
    order.total_cost = order.total_cost + order_params[:shipping_cost].to_i + order_params[:packaging_cost].to_i
    if order.save
-     session[:order_items].each do |item|
-       OrderProduct.create(product_id: item['id'], order_id: order.id)
+     current_user.cart.cart_products.each do |item|
+       OrderProduct.create(product_id: item.product.id, order_id: order.id, amount: item.amount)
      end
    end
-   session.delete(:order_items)
+   current_user.cart.clear
+   current_user.cart.save
    redirect_to orders_path, notice: 'Order created'
   end
 

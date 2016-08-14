@@ -10,10 +10,17 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+  def remove_all_from_order
+    current_user.cart.clear
+    current_user.cart.save
+    redirect_to products_path, notice: 'Order cleared'
+  end
+
   def remove_from_order
     if current_user.cart.present?
       current_user.cart.remove(params[:id])
     end
+    redirect_to products_path, notice: 'Remove a product from order'
   rescue ActiveRecord::RecordNotFound
     redirect_to products_path, alert: 'There is no such product'
   end
