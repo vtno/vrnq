@@ -8,7 +8,7 @@
   <td>
     <%= p.cost%>
   </td>
-  <%if p.stock < 3%>
+  <%if p.stock < 3 && p.stock > 0%>
     <td class='warning'>
   <%elsif p.stock == 0%>
     <td class='danger'>
