@@ -10,6 +10,8 @@
   </td>
   <%if p.stock < 3%>
     <td class='warning'>
+  <%elsif p.stock == 0%>
+    <td class='danger'>
   <%else%>
     <td>
   <%end%>
