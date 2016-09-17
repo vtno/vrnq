@@ -26,10 +26,9 @@ class OrdersController < ApplicationController
      current_user.cart.cart_products.each do |item|
        OrderProduct.create(product_id: item.product.id, order_id: order.id, amount: item.amount)
 
-      # FIXME remove comment after adding all previous order
-      #  updated_stock = item.product.stock - item.amount
-      #  item.product.stock = updated_stock
-      #  item.product.save
+       updated_stock = item.product.stock - item.amount
+       item.product.stock = updated_stock
+       item.product.save
      end
    end
    current_user.cart.clear
