@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.order(:name)
     @order = Order.new
     @cart = current_user.cart
     @cart ||= Cart.create(user_id: current_user.id)
